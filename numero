@@ -1,0 +1,30 @@
+#! /bin/bash 
+#! /bin/yash
+
+numero=0
+echo "Este es el numero inicial: "$numero
+read numero=45
+echo "Este es el nuevo numero: "$numero
+
+
+foo="004"
+echo $foo
+foo="`python -c "print $foo"`" 
+echo $foo
+arreglo=(uno dos tres cuatro)
+echo ${arreglo[*]}
+unset arreglo[0]
+echo ${arreglo[*]}
+set arreglo[0]
+num1="0.02001"
+num2="1.1001"
+cero="0"
+if (( $(echo "$num1 > $cero" |bc -l) )); then
+calc $num1 - $cero
+echo "es mayor cero"
+fi
+if (( $(echo "$num2 > $uno" |bc -l) )); then
+calc $num2 - $uno
+echo "es mayor a uno"
+fi
+echo "$((1.2 / 3))"

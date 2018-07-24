@@ -1,0 +1,50 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'turf/turf' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 warn package.json JSV@4.0.2 'repositories' (plural) Not supported. Please pick one as the 'repository' field
+5 warn package.json fs@0.0.1-security fs is also the name of a node core module.
+6 warn package.json gzip@0.1.0 No repository field.
+7 warn package.json gzip@0.1.0 No README data
+8 warn package.json string_decoder@0.10.31 string_decoder is also the name of a node core module.
+9 silly cache add args [ 'turf/turf', null ]
+10 verbose cache add spec turf/turf
+11 silly cache add parsed spec { raw: 'turf/turf',
+11 silly cache add   scope: null,
+11 silly cache add   name: null,
+11 silly cache add   rawSpec: 'turf/turf',
+11 silly cache add   spec: 'turf/turf',
+11 silly cache add   type: 'github' }
+12 info maybeGithub Attempting turf/turf from git://github.com/turf/turf
+13 verbose addRemoteGit u="git://github.com/turf/turf" silent=true
+14 silly addRemoteGit normalized { url: 'git://github.com/turf/turf', branch: 'master' }
+15 silly addRemoteGit v git-github-com-turf-turf-abfce81f
+16 verbose addRemoteGit /home/centos/.npm/_git-remotes/git-github-com-turf-turf-abfce81f not in flight; cloning
+17 verbose git clone git://github.com/turf/turf undefined
+17 verbose git clone git://github.com/turf/turf undefined
+18 info maybeGithub Attempting turf/turf from git+ssh://git@github.com:turf/turf
+19 verbose addRemoteGit u="git+ssh://git@github.com:turf/turf" silent=false
+20 silly addRemoteGit normalized { url: 'ssh://git@github.com/turf/turf', branch: 'master' }
+21 silly addRemoteGit v ssh-git-github-com-turf-turf-5429acf4
+22 verbose addRemoteGit /home/centos/.npm/_git-remotes/ssh-git-github-com-turf-turf-5429acf4 not in flight; cloning
+23 error git clone ssh://git@github.com/turf/turf undefined
+23 error git clone ssh://git@github.com/turf/turf undefined
+24 verbose stack Error: not found: git
+24 verbose stack     at F (/usr/local/lib/node_modules/npm/node_modules/which/which.js:38:28)
+24 verbose stack     at E (/usr/local/lib/node_modules/npm/node_modules/which/which.js:41:29)
+24 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/which/which.js:52:16
+24 verbose stack     at FSReqWrap.oncomplete (fs.js:99:15)
+25 verbose cwd /home/centos/scripts/Node
+26 error Linux 3.10.0-693.5.2.el7.x86_64
+27 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "turf/turf"
+28 error node v0.12.0
+29 error npm  v2.5.1
+30 error code ENOGIT
+31 error not found: git
+32 error Failed using git.
+32 error This is most likely not a problem with npm itself.
+32 error Please check if you have git installed and in your PATH.
+33 verbose exit [ 1, true ]

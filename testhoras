@@ -1,0 +1,63 @@
+#! /bin/bash
+ 
+	item="IIUNAM"
+        tiempoUTC=`date +%s`
+        difHoraria=`TZ=America/Mexico_City date +%z`
+        horalocal=`TZ=America/Mexico_City date +%h`
+        anio=`TZ=America/Mexico_City date +%Y`
+        mes=`TZ=America/Mexico_City date +%m`
+        dia=`TZ=America/Mexico_City date +%d`
+        hora=16
+        minuto=0
+        segundo=0
+
+        difHoraria=${difHoraria:0:3}
+        difHoraria=`calc 0 - $difHoraria`
+        segdifHoraria=`calc 60*60*$difHoraria`
+        UTClocal=`calc $tiempoUTC - $segdifHoraria`
+        hacequince=`calc $UTClocal - 900`
+        hacemedia=`calc $UTClocal - 1800`
+        hacehora=`calc $UTClocal - 3600`
+        hacetres=`calc $UTClocal - 10800`
+        haceseis=`calc $UTClocal - 21600`
+        hacedoce=`calc $UTClocal - 21600`
+        hacedia=`calc $UTClocal - 43200`
+
+      if [[ $horalocal -gt  15 ]]; then
+          echo "La hora local es mayor que las tres de la tarde "
+          anio=`TZ=America/Mexico_City date +%Y`
+          echo $anio
+          mes=`TZ=America/Mexico_City date +%m`
+          echo $mes
+          dia=`TZ=America/Mexico_City date +%d`
+          echo $dia
+
+        else
+          echo "La hora local es menor que las tres de la tarde "
+          anio=`TZ=America/Mexico_City date -d '1 day ago' '+%Y'`
+          echo $anio
+          mes=`TZ=America/Mexico_City date -d '1 day ago' '+%m'`
+          echo $mes
+          dia=`TZ=America/Mexico_City date -d '1 day ago' '+%d'`
+          echo $dia
+
+
+       fi
+
+        acum4pm=`date -d ''$anio'-'$mes'-'$dia' 16:00:00' '+%s'`
+        echo $acum4pm
+     
+
+        temporal=`mysql -N -u root -pyorgos84 test << EOF
+        select MAX(acumuladaplus), MIN(acumuladaplus) from estaciones where estacion = '$item' AND unix_timestamp(fecha_servidor) >= '$hacedia';
+        select MAX(acumuladaplus), MIN(acumuladaplus) from estaciones where estacion = '$item' AND unix_timestamp(fecha_servidor) >= '$acum4pm';
+EOF`
+
+        temporal2=`mysql -N -u root -pyorgos84 test << EOF
+        select MAX(acumuladaplus), MIN(acumuladaplus) from estaciones where estacion = '$item' AND unix_timestamp(fecha_servidor) >= '$acum4pm';
+EOF`
+
+
+
+echo $temporal
+echo $temporal2 

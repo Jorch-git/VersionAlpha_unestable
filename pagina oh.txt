@@ -1,0 +1,97 @@
+
+
+function carga(){
+
+ mapaJSON2 = new google.maps.Data();  
+
+  
+mapaJSON2.loadGeoJson("tests/idw2.geojson");
+
+
+mapaJSON2.setStyle(function(feature) {
+      var valor = feature.getProperty('z');
+      var opacidad = 0.6;
+      var color = "white";
+      if (valor < 5)
+      {
+          opacidad = 0;
+      }
+      if (valor >= 5 && valor < 15)
+      {
+          opacidad = 0.6;
+          color = "LightBlue";
+      }
+       if (valor >= 15 && valor < 25)
+      {
+          opacidad = 0.6;
+          color = "DeepSkyBlue";
+      }
+       if (valor >= 25 && valor < 35)
+      {
+          opacidad = 0.6;
+          color = "RoyalBlue";
+      }
+       if (valor >= 35 && valor < 45)
+      {
+          opacidad = 0.6;
+          color = "MediumBlue";
+      }
+       if (valor >= 45 && valor < 55)
+      {
+          opacidad = 0.6;
+          color = "MidnightBlue";
+      }
+       if (valor >= 55 && valor < 150)
+      {
+          opacidad = 0.6;
+          color = "DarkSlateBlue";
+      }
+   return({
+     fillColor: color,
+     strokeWeight: 0,
+     strokeColor: 'White',
+     fillOpacity: opacidad
+     });
+  });
+
+
+ mapaJSON2.setMap(map);
+
+}
+
+
+
+function interpolateColors(color1, color2, steps) {
+    var stepFactor = 1 / (steps - 1),
+        interpolatedColorArray = [];
+
+    color1 = color1.match(/\d+/g).map(Number);
+    color2 = color2.match(/\d+/g).map(Number);
+
+    for(var i = 0; i < steps; i++) {
+        interpolatedColorArray.push(interpolateColor(color1, color2, stepFactor * i));
+    }
+
+    return interpolatedColorArray;
+}
+
+
+var rangoA = interpolateColors("rgb(255,247,251)", "rgb(236,231,242)", 255);
+var rangoA = interpolateColors("rgb(236,231,242)", "rgb(208,209,230)", 255);
+var rangoA = interpolateColors("rgb(255,247,251)", "rgb(236,231,242)", 255);
+var rangoA = interpolateColors("rgb(255,247,251)", "rgb(236,231,242)", 255);
+var rangoA = interpolateColors("rgb(255,247,251)", "rgb(236,231,242)", 255);
+var rangoA = interpolateColors("rgb(255,247,251)", "rgb(236,231,242)", 255);
+var rangoA = interpolateColors("rgb(255,247,251)", "rgb(236,231,242)", 255);
+
+
+
+255,247,251
+236,231,242
+208,209,230
+166,189,219
+116,169,207
+54,144,192
+5,112,176
+4,90,141
+2,56,88

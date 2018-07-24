@@ -1,0 +1,126 @@
+
+#! /bin/bash
+test=""
+segundo=""
+para=60
+dir="data"
+data="data"
+tmpAcumII=0
+cuentaII=0
+NAcumII=0
+acum=0
+archivo="data/datos.txt"
+cabecera='{
+    "type": "FeatureCollection",
+    "features": ['
+pie="}]
+  }"
+intermedio=""
+cd /home/centos/scripts/Node
+while [[ 1 ]]; do
+        actual=$(date "+%s")
+        diez="`calc $actual - 86400`"
+        lineaIIUNAM=$(head -n 1 /home/centos/scripts/Node/data/IIUNAMacum.txt)
+        lineaSACMEX=$(head -n 1 /home/centos/scripts/Node/data/SACMEXacum.txt)
+        lineaMADIN=$(head -n 1 /home/centos/scripts/Node/data/MADINacum.txt)
+        lineaPREPA4=$(head -n 1 /home/centos/scripts/Node/data/PREPA4acum.txt)
+        lineaCOAPA=$(head -n 1 /home/centos/scripts/Node/data/COAPAacum.txt)
+        lineaVHERMOSA=$(head -n 1 /home/centos/scripts/Node/data/VHERMOSAacum.txt)
+        lineaCUAJIMALPA=$(head -n 1 /home/centos/scripts/Node/data/CUAJIMALPAacum.txt)
+        lineaARAGON=$(head -n 1 /home/centos/scripts/Node/data/ARAGONacum.txt)
+        lineaDOSRIOS=$(head -n 1 /home/centos/scripts/Node/data/DOSRIOSacum.txt)
+        lineaBOSQUEREAL=$(head -n 1 /home/centos/scripts/Node/data/BOSQUEREALacum.txt)
+        lineaTLALNE=$(head -n 1 /home/centos/scripts/Node/data/TLALNEacum.txt)
+        lineaCCHOTE=$(head -n 1 /home/centos/scripts/Node/data/CCHOTEacum.txt)
+        lineaCCHVALLEJO=$(head -n 1 /home/centos/scripts/Node/data/CCHVALLEJOacum.txt)
+        lineaUAMAZC=$(head -n 1 /home/centos/scripts/Node/data/UAMAZCacum.txt)
+
+        tmpIIUNAM="$(echo $lineaIIUNAM | cut -d "," -f 1)"
+        tmpSACMEX="$(echo $lineaSACMEX | cut -d "," -f 1)"
+        tmpMADIN="$(echo $lineaMADIN | cut -d "," -f 1)"
+        tmpPREPA4="$(echo $lineaPREPA4 | cut -d "," -f 1)"
+        tmpCOAPA="$(echo $lineaCOAPA | cut -d "," -f 1)"
+        tmpVHERMOSA="$(echo $lineaVHERMOSA | cut -d "," -f 1)"
+        tmpCUAJIMALPA="$(echo $lineaCUAJIMALPA | cut -d "," -f 1)"
+        tmpARAGON="$(echo $lineaARAGON | cut -d "," -f 1)"
+        tmpDOSRIOS="$(echo $lineaDOSRIOS | cut -d "," -f 1)"
+        tmpBOSQUEREAL="$(echo $lineaBOSQUEREAL | cut -d "," -f 1)"
+        tmpTLALNE="$(echo $lineaTLALNE | cut -d "," -f 1)"
+        tmpCCHOTE="$(echo $lineaCCHOTE | cut -d "," -f 1)"
+        tmpCCHVALLEJO="$(echo $lineaCCHVALLEJO | cut -d "," -f 1)"
+        tmpUAMAZC="$(echo $lineaUAMAZC | cut -d "," -f 1)"
+
+
+
+        if [[ "$diez" -gt "$tmpIIUNAM" ]];then
+                sed -i '/'"$tmpIIUNAM"'/'d /home/centos/scripts/Node/data/IIUNAMacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpSACMEX" ]];then
+                sed -i '/'"$tmpSACMEX"'/'d /home/centos/scripts/Node/data/SACMEXacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpMADIN" ]];then
+                sed -i '/'"$tmpMADIN"'/'d /home/centos/scripts/Node/data/MADINacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpPREPA4" ]];then
+                sed -i '/'"$tmpPREPA4"'/'d /home/centos/scripts/Node/data/PREPA4acum.txt
+        fi
+        if [[ "$diez" -gt "$tmpCOAPA" ]];then
+                sed -i '/'"$tmpCOAPA"'/'d /home/centos/scripts/Node/data/COAPAacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpVHERMOSA" ]];then
+                sed -i '/'"$tmpVHERMOSA"'/'d /home/centos/scripts/Node/data/VHERMOSAacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpCUAJIMALPA" ]];then
+                sed -i '/'"$tmpCUAJIMALPA"'/'d /home/centos/scripts/Node/data/CUAJIMALPAacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpARAGON" ]];then
+                sed -i '/'"$tmpARAGON"'/'d /home/centos/scripts/Node/data/ARAGONacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpDOSRIOS" ]];then
+                sed -i '/'"$tmpDOSRIOS"'/'d /home/centos/scripts/Node/data/DOSRIOSacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpBOSQUEREAL" ]];then
+                sed -i '/'"$tmpBOSQUEREAL"'/'d /home/centos/scripts/Node/data/BOSQUEREALacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpTLALNE" ]];then
+                sed -i '/'"$tmpTLALNE"'/'d /home/centos/scripts/Node/data/TLALNEacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpCCHOTE" ]];then
+                sed -i '/'"$tmpCCHOTE"'/'d /home/centos/scripts/Node/data/CCHOTEacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpCCHVALLEJO" ]];then
+                sed -i '/'"$tmpCCHVALLEJO"'/'d /home/centos/scripts/Node/data/CCHVALLEJOacum.txt
+        fi
+        if [[ "$diez" -gt "$tmpUAMAZC" ]];then
+                sed -i '/'"$tmpUAMAZC"'/'d /home/centos/scripts/Node/data/CCHVALLEJOacum.txt
+        fi
+
+
+        intermedio="`head -n -1 /home/centos/scripts/Node/data/datos.txt`"
+        #sleep 1
+        rutaIIUNAM="/home/centos/scripts/Node/data/IIUNAMacum.txt"
+        NAcumII=0
+        cuentaII=0
+        tmpAcumII=0
+        uno=1
+        cero=0
+
+        echo $cabecera$intermedio$pie
+        echo $cabecera$intermedio$pie > $dir/$data.geojson
+        #echo $cabecera
+        #echo $intermedio
+        #echo $pie
+        cd /home/centos/scripts/Node
+        ./tests2.sh
+        sleep 1
+        #gzip -f /home/centos/scripts/Node/tests/idw1.geojson
+        sudo scp -i /home/centos/scripts/Node/id_rsa /home/centos/scripts/Node/tests/compres/matriz.txt.gz /home/centos/scripts/Node/data/datos2.txt jorge@166.62.38.156:/home/jorge/public_html/geojson
+        sudo rm /home/centos/scripts/Node/data/sed*
+        segundo=$(date "+%S")
+	segundo=`echo $segundo | sed 's/^0*//'`
+        echo $segundo
+        resta="`calc $para - $segundo`"
+        echo $resta
+        sleep $resta
+done
+

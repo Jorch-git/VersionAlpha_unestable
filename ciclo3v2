@@ -1,0 +1,219 @@
+#! /bin/bash
+segundo=""
+para=60
+dir="data"
+data="data"
+tmpAcumII=0
+cuentaII=0
+NAcumII=0
+acum=0
+dir="/home/centos/scripts/Node/data"
+archivo="data/datos.txt"
+cabecera='{
+    "type": "FeatureCollection",
+    "features": ['
+pie="}]
+  }"
+intermedio=""
+cd /home/centos/scripts/Node
+while [[ 1 ]]; do
+        sleep 5
+        acumIIUNAMini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/IIUNAMacum.txt | cut -d "," -f 3`")
+        acumIIUNAMfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/IIUNAMacum.txt | cut -d "," -f 3`")
+        difIIUNAM="`calc $acumIIUNAMfin - $acumIIUNAMini`"
+
+        acumDOSRIOSini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/DOSRIOSacum.txt | cut -d "," -f 3`")
+        acumDOSRIOSfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/DOSRIOSacum.txt | cut -d "," -f 3`")
+        difDOSRIOS="`calc $acumDOSRIOSfin - $acumDOSRIOSini`"
+
+        acumCUAJIMALPAini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/CUAJIMALPAacum.txt | cut -d "," -f 3`")
+        acumCUAJIMALPAfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/CUAJIMALPAacum.txt | cut -d "," -f 3`")
+        difCUAJIMALPA="`calc $acumCUAJIMALPAfin - $acumCUAJIMALPAini`"
+
+        acumBOSQUEREALini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/BOSQUEREALacum.txt | cut -d "," -f 3`")
+        acumBOSQUEREALfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/BOSQUEREALacum.txt | cut -d "," -f 3`")
+        difBOSQUEREAL="`calc $acumBOSQUEREALfin - $acumBOSQUEREALini`"
+
+        acumMADINini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/MADINacum.txt | cut -d "," -f 3`")
+        acumMADINfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/MADINacum.txt | cut -d "," -f 3`")
+        difMADIN="`calc $acumMADINfin - $acumMADINini`"
+
+        acumVHERMOSAini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/VHERMOSAacum.txt | cut -d "," -f 3`")
+        acumVHERMOSAfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/VHERMOSAacum.txt | cut -d "," -f 3`")
+        difVHERMOSA="`calc $acumVHERMOSAfin - $acumVHERMOSAini`"
+
+        acumPREPA4ini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/PREPA4acum.txt | cut -d "," -f 3`")
+        acumPREPA4fin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/PREPA4acum.txt | cut -d "," -f 3`")
+        difPREPA4="`calc $acumPREPA4fin - $acumPREPA4ini`"
+
+        acumSACMEXini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/SACMEXacum.txt | cut -d "," -f 3`")
+        acumSACMEXfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/SACMEXacum.txt | cut -d "," -f 3`")
+        difSACMEX="`calc $acumSACMEXfin - $acumSACMEXini`"
+
+	
+        if [[ -s /home/centos/scripts/Node/data/COAPAacum.txt  ]] ; then
+        echo "$FILE has data."
+        acumCOAPAini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/COAPAacum.txt | cut -d "," -f 3`")
+        acumCOAPAfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/COAPAacum.txt | cut -d "," -f 3`")
+        difCOAPA="`calc $acumCOAPAfin - $acumCOAPAini`"
+        else
+        echo "$FILE is empty."
+        difCOAPA=0
+        fi
+
+        acumARAGONini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/ARAGONacum.txt | cut -d "," -f 3`")
+        acumARAGONfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/ARAGONacum.txt | cut -d "," -f 3`")
+        difARAGON="`calc $acumARAGONfin - $acumARAGONini`"
+
+        acumTLALNEini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/TLALNEacum.txt | cut -d "," -f 3`")
+        acumTLALNEfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/TLALNEacum.txt | cut -d "," -f 3`")
+        difTLALNE="`calc $acumTLALNEfin - $acumTLALNEini`"
+
+        acumCCHOTEini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/CCHOTEacum.txt | cut -d "," -f 3`")
+        acumCCHOTEfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/CCHOTEacum.txt | cut -d "," -f 3`")
+        difCCHOTE="`calc $acumCCHOTEfin - $acumCCHOTEini`"
+
+        acumCCHVALLEJOini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/CCHVALLEJOacum.txt | cut -d "," -f 3`")
+        acumCCHVALLEJOfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/CCHVALLEJOacum.txt | cut -d "," -f 3`")
+        difCCHVALLEJO="`calc $acumCCHVALLEJOfin - $acumCCHVALLEJOini`"
+
+
+        acumUAMAZCini=$(python -c "print `awk 'NR==1' /home/centos/scripts/Node/data/UAMAZCacum.txt | cut -d "," -f 3`")
+        acumUAMAZCfin=$(python -c "print `awk '/./{line=$0} END{print line}' /home/centos/scripts/Node/data/UAMAZCacum.txt | cut -d "," -f 3`")
+        difUAMAZC="`calc $acumUAMAZCfin - $acumUAMAZCini`"
+
+        echo "La acumulada en IIUNAM es: "$difIIUNAM
+        echo "La acumulada en DOSRIOS es: "$difDOSRIOS
+        echo "La acumulada en CUAJIMALPA es: "$difCUAJIMALPA
+        echo "La acumulada en BOSQUE REAL es: "$difBOSQUEREAL
+        echo "La acumulada en MADIN es: "$difMADIN
+        echo "La acumulada en VISTA HERMOSA es: "$difVHERMOSA
+        echo "La acumulada en PREPA4 es: "$difPREPA4
+        echo "La acumulada en SACMEX es: "$difSACMEX
+        echo "La acumulada en COAPA es: "$difCOAPA
+        echo "La acumulada en ARAGON es: "$difARAGON
+        echo "La acumulada en TLALNE es: "$difTLALNE
+        echo "La acumulada en CCH-OTE es: "$difCCHOTE
+        echo "La acumulada en CCH-VALLEJO es: "$difCCHVALLEJO
+        echo "La acumulada en UAM-AZC es: "$difUAMAZC
+
+echo " {
+    "'"type"'": "'"FeatureCollection"'",
+   "'"features"'": [
+        { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.344314, 19.370004]},
+        "'"properties"'": {
+          "'"name"'": "'"DOS RIOS"'",
+          "'"value"'": "$difDOSRIOS"
+        }
+      },
+      {"'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.291582,  19.355342]},
+        "'"properties"'": {
+          "'"name"'": "'"CUAJIMALPA"'",
+          "'"value"'": "$difCUAJIMALPA"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.283330, 19.436133]},
+        "'"properties"'": {
+          "'"name"'": "'"BOSQUE REAL"'",
+          "'"value"'": "$difBOSQUEREAL"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.267414, 19.522665]},
+        "'"properties"'": {
+          "'"name"'": "'"P MADIN"'",
+          "'"value"'": "$difMADIN"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.276242, 19.372083]},
+        "'"properties"'": {
+          "'"name"'": "'"VHERMOSA"'",
+          "'"value"'": "$difVHERMOSA"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.196129, 19.403589]},
+        "'"properties"'": {
+          "'"name"'": "'"PREPA 4"'",
+          "'"value"'": "$difPREPA4"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.18187, 19.32982]},
+        "'"properties"'": {
+          "'"name"'": "'"IIUNAM"'",
+          "'"value"'": "$difIIUNAM"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.137096, 19.425079]},
+        "'"properties"'": {
+          "'"name"'": "'"SACMEX"'",
+          "'"value"'": "$difSACMEX"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.134678, 19.287818]},
+        "'"properties"'": {
+          "'"name"'": "'"C MADRID"'",
+          "'"value"'": "$difCOAPA"
+        }
+      },
+      { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.079917, 19.465908]},
+        "'"properties"'": {
+          "'"name"'": "'"ARAGON"'",
+          "'"value"'": "$difARAGON"
+        }
+       },
+       { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.194856, 19.538833]},
+        "'"properties"'": {
+          "'"name"'": "'"TLALNE"'",
+          "'"value"'": "$difTLALNE"
+        }
+       },
+       { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.059703, 19.383573]},
+        "'"properties"'": {
+          "'"name"'": "'"CCH-OTE"'",
+          "'"value"'": "$difCCHOTE"
+        }
+       },
+       { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.140496, 19.482562]},
+        "'"properties"'": {
+          "'"name"'": "'"CCH-OTE"'",
+          "'"value"'": "$difCCHVALLEJO"
+        }
+       },
+       { "'"type"'": "'"Feature"'",
+        "'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": [-99.18924166, 19.5035917]},
+        "'"properties"'": {
+          "'"name"'": "'"UAM AZC"'",
+          "'"value"'": "$difUAMAZC"
+        }
+       }
+
+
+
+        ]}" > $dir/datosAcum.txt
+
+
+        cd /home/centos/scripts/Node
+        ./acum.sh
+        sleep 1
+        sudo scp -i /home/centos/scripts/Node/id_rsa /home/centos/scripts/Node/tests/compres/Acumatriz.txt.gz jorge@166.62.38.156:/home/jorge/public_html/geojson
+
+        segundo=$(date "+%S")
+        segundo=`echo $segundo|sed 's/^0*//'`
+        echo $segundo
+        resta="`calc $para - $segundo`"
+        echo $resta
+        sleep $resta
+done
+

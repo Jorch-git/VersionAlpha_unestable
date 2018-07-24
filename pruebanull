@@ -1,0 +1,39 @@
+#! /bin/bash
+
+echo "hola mundo"
+
+
+temporal2=`mysql -N -u root -pyorgos84 test << EOF
+        select MAX(acumuladaplus), MIN(acumuladaplus) from estaciones where estacion = 'IIUNAM' AND date(fecha_servidor) >= '2018-03-07';
+EOF`
+
+temporal3=`mysql -N -u root -pyorgos84 test << EOF
+        select MAX(acumuladaplus), MIN(acumuladaplus) from estaciones where estacion = 'IIUNAM' AND date(fecha_servidor) >= '2018-07-03';
+EOF`
+
+test2="`echo $temporal2 | cut -d " " -f 1`"
+test3="`echo $temporal3 | cut -d " " -f 1`"
+
+echo " Temporal 2 es "$test2
+echo " Temporal 3 es "$test3
+
+
+if [[ $test2 == "NULL" ]]; then
+
+	echo "valor nulo de "$test2
+else
+	echo "else valor no nulo de "$test2
+fi
+
+if [[ $test3 == "NULL" ]]; then
+
+	echo "valor nulo de "$test3
+else
+	echo "else valor no nulo de "$test3
+fi
+
+tres=23
+
+        if [[ $tres2 -eq -99 ]]; then
+          $tres2="ND"
+        fi

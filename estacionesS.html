@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <title>Observatorio Hidrológico IIUNAM</title>
+
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+   <link rel="stylesheet" href="css/custom.css">
+   <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+
+
+
+
+  <style>
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+    .row.content {height: 650px;}
+
+    
+
+    /* Set 100% height */
+
+    .sidenav {
+
+      
+
+      height: 100%;
+
+    } 
+
+    .page-header {
+    padding-bottom: 9px;
+    margin: 20px 0 10px;
+    border-bottom: 1px solid #eee;
+    }
+
+    .container.jumbotron{
+        margin : 0px;
+        padding: 0px;
+        border-radius: 0px;
+    }
+
+    #cosa {
+        position: relative;
+        bottom: 15px;
+    }
+
+        
+
+    /* On small screens, set height to 'auto' for the grid */
+
+    @media screen and (max-width: 767px) {
+
+      .row.content {height: auto;} 
+
+    }
+
+   #todasEstaciones {
+            /*background-color: white;*/
+            /*border: 1px solid black;*/
+            /*display: inline-block;*/
+            position: absolute;
+            top: 44px;
+            right: 75px;
+            height: 40px;
+            width: 140px;
+            padding: 0px;
+            z-index: 1;
+            
+    }
+
+    #checa {
+            position: relative;
+            bottom: -2px;
+            padding: 4px;
+            border-radius: 5px;
+            background-color: white;
+
+
+    }
+
+    #acumuladas{
+      
+      background-color: white;
+      width: 190px;
+    }
+
+     #lista{
+           
+      width: 190px;
+      text-align: justify;
+    }
+
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+
+
+<!-- Inicio de Encabezado -->
+
+<div class="container">
+
+  <div class="page-header">
+
+    <figure class="encabezado"><img src="img/encabezado.jpg"></figure>    
+
+  </div> 
+
+</div>
+
+<!-- Fin de Encabezado -->
+
+
+
+<div class="cuerpomapa">
+
+  <div class="navegacion">
+
+<!-- Inicio de Barra de Navegacion -->
+
+  <nav class="navbar navbar-inverse visible-ld">
+
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+
+          <span class="icon-bar"></span>
+
+          <span class="icon-bar"></span>
+
+          <span class="icon-bar"></span>                            
+
+        </button>
+
+        <a class="navbar-brand" href="index.html">Inicio</a>
+
+      </div>
+
+      <div class="collapse navbar-collapse" id="myNavbar">
+
+        <ul class="nav navbar-nav">
+
+          <li><a href="informacion.html">Información</a></li>
+
+          <li><a href="estaciones.html">Estaciones de Medición</a></li>
+
+          <li><a href="personal.html">Personal</a></li>
+
+          <li><a href="galeria.html">Galería</a></li>
+
+          <li><a href="contacto.php">Contacto</a></li>
+
+          <li><a href="ohkids.html">OH-Kids</a></li>
+
+          <li><a href="agradecimientos.html">Agradecimientos</a></li>
+
+        </ul>
+
+        <div class="navba navbar-right">
+      
+        <p><figure class="imgtwit"><a href="https://twitter.com/OH_IIUNAM"><img src="img/twitter-blanco.png"></a></figure></p>
+                 
+         
+        </div>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  </div>
+
+  <!-- Fin de barras de navegacion -->
+
+
+
+  <!-- Inicio de cuerpo de la pagina -->
+
+  <br>
+
+  <div class="container-fluid">
+
+    <div id="cosa" class = "row fila">    
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped active hidden" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:99%" id = "barrita">Cargando datos por favor espere ... </div>
+        </div>
+        <!-- <div id="tabla" class="hidden text-center">    
+                <button type="button" class="btn btn-default" id="p1" data-toggle="tooltip" title="Descarga Datos">IIUNAM <span class="badge">2.2</span></button>
+                <button type="button" class="btn btn-default" id="p2" data-toggle="tooltip" title="Descarga Datos">SACMEX <span class="badge">3.3</span></button>
+                <button type="button" class="btn btn-default" id="p3" data-toggle="tooltip" title="Descarga Datos">ARAGON <span class="badge">4.4</span></button>
+                <button type="button" class="btn btn-default" id="p4" data-toggle="tooltip" title="Descarga Datos">MADIN <span class="badge">5.6</span></button>
+                <button type="button" class="btn btn-default" id="p5" data-toggle="tooltip" title="Descarga Datos">VHERMOSA <span class="badge">0</span></button>
+                <button type="button" class="btn btn-default" id="p6" data-toggle="tooltip" title="Descarga Datos">BOSQUEREAL <span class="badge">0.6</span></button>
+                <button type="button" class="btn btn-default" id="p7" data-toggle="tooltip" title="Descarga Datos">COAPA <span class="badge">25.45</span></button>
+                <button type="button" class="btn btn-default" id="p8" data-toggle="tooltip" title="Descarga Datos">PREPA4 <span class="badge">37.98</span></button>
+                <button type="button" class="btn btn-default" id="p9" data-toggle="tooltip" title="Descarga Datos">DOSRIOS <span class="badge">12.24</span></button>
+                <button type="button" class="btn btn-default" id="p10" data-toggle="tooltip" title="Descarga Datos">CUAJIMALPA <span class="badge">14.23</span></button>
+                <button type="button" class="btn btn-default" id="p11" data-toggle="tooltip" title="Descarga Datos">SISAL <span class="badge">54.2</span></button>
+               
+        </div> -->
+    </div>
+    
+
+    <div class="row content">  
+
+               
+
+        <div class="col-sm-12">
+
+                              
+           <!-- Panel lateral: Contenido: Carga de Mapa -->
+           <div class="tab-pane active" id="mapas">
+
+             <!-- <h4><i><b>Ubicación de las estaciones en la cuenca de aguas del valle de México</i></b></h4><BR> -->
+                <div id="todasEstaciones">
+                    <div class="dropdown" id = "BtnEstaciones">
+                      <button class="btn btn-default btn-sm dropdown-toggle hidden" type="button" data-toggle="dropdown" id="acumuladas">Precipitación acumulada diaria<br>a partir de las 4 pm
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu text-center" id="lista">
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p1" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p2" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p3" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p4" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p5" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p6" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p7" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p8" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p9" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p10" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p11" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                        <li class="text-center" style="cursor: pointer; cursor: hand" id="p12" data-toggle="tooltip" data-placement="left" title="Descarga Datos"><span class="badge">0</span></li>
+                      </ul>
+                    </div>
+                </div>
+                <button class="btn btn-default btn-sm hidden" type="button" id="animaGOES">Animación GOES</button>
+                <label id="checa" class="hidden"><input type="checkbox" vclass="checkbox" value="The Value" checked="checked" id="myCheck">Última Imagen GOES-IR</label>
+                  <label id="palanca"><input type="checkbox" id="palanca2" data-toggle="toggle"></label>
+                  <div id="map" style="width: 100%; height: 650px;"></div>
+                  <br>
+                  <h6><b>La lluvia</b> representa uno de los elementos clave del ciclo hidrológico y energético del sistema terrestre, por lo que conocer <b>su intensidad y variación espacial y temporal,</b> es de gran interés para la ingeniería hidráulica e hidrológica.
+                  <BR>
+                  Con el propósito de mantener a la vanguardia las líneas de investigación que actualmente se cultivan en el Instituto de Ingeniería, <b>se establece el Observatorio hidrológico del Instituto de Ingeniería de la UNAM.</b>
+                  <BR>
+                  Esta red de instrumentos representa el primer esfuerzo en su tipo instalado en latino-américa.   
+                  </h6>
+              </div>
+            
+
+
+                   
+
+      
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+<!-- Fin de cuerpo de la pagina -->
+
+
+
+
+
+<!-- Inicio de Pie de Pagina -->
+
+<header class="container-fluid text-center">
+
+  Agradecemos el apoyo solidario a las siguientes instituciones
+
+  <p><figure class="piepagina"><img src="img/piepagina.jpg"></figure></p>
+
+</header>
+
+<footer class="container-fluid text-center">
+
+  <p>Observatorio Hidrológico del Instituto de Ingeniería UNAM<br>
+
+  Circuito Escolar s/n, Ciudad Universitaria, Delegación Coyoacán, México D.F., C.P. 04510, Teléfono +52(55)5623-3600 ©Todos los derechos reservados UNAM 2016.<br>
+
+  Esta página puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica. De otra forma requiere permiso previo por escrito de la institución. Web master<br>
+
+  Hecho en México. 2016</p>
+
+</footer>
+
+
+
+<!-- Fin de Pie de Pagina -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+  <script src="js/custom.js"></script>
+  <script src="js/FileSaver.js"></script>
+  <script src="estaciones14.js"></script>
+  <script src="js/pako.js"></script>
+
+
+
+
+  
+
+
+<script>
+    $('.navegacion').affix({
+        offset: {
+          top: $('header').height()
+        }
+  });	
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+
+
+  ga('create', 'UA-84192298-1', 'auto');
+
+  ga('send', 'pageview');
+
+
+
+</script>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkefYTTmcRxASIR_0sj8CPec8_sJr94Ws&callback=initMap" async defer></script>
+
+
+ 
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+#! /bin/bash
+echo "Programa Estaciones"
+ruta="/var/ftp/pub"
+temporal=""
+variable1=""
+estacion=""
+IIUNAM=""
+IIUNAMMESA=""
+COAPA=""
+COAPAMESA=""
+ARAGON=""
+ARAGONMESA=""
+BOSQUEREAL=""
+BOSQUEREALMESA=""
+minActual=$(date "+%M")
+min=70
+number=1
+archivo=""
+dir="/home/centos/scripts/Node/data"
+datos="datos"
+datos2="datos2"
+compara=""
+inten=""
+coord=""
+titulo="$(date '+%y-%m-%d_%T')"
+parametro=""
+control=""
+inten=""
+acum=""
+inten2=""
+acum2=""
+guion=""
+estacion1=""
+touch /home/centos/scripts/Node/data/IIUNAMacum.txt
+touch /home/centos/scripts/Node/data/SACMEXacum.txt
+touch /home/centos/scripts/Node/data/MADINacum.txt
+touch /home/centos/scripts/Node/data/PREPA4acum.txt
+touch /home/centos/scripts/Node/data/DOSRIOSacum.txt
+touch /home/centos/scripts/Node/data/CUAJIMALPAacum.txt
+touch /home/centos/scripts/Node/data/BOSQUEREALacum.txt
+touch /home/centos/scripts/Node/data/VHERMOSAacum.txt
+touch /home/centos/scripts/Node/data/ARAGONacum.txt
+touch /home/centos/scripts/Node/data/COAPAacum.txt
+
+chown centos:centos /home/centos/scripts/Node/data/IIUNAMacum.txt
+chown centos:centos /home/centos/scripts/Node/data/SACMEXacum.txt
+chown centos:centos /home/centos/scripts/Node/data/MADINacum.txt
+chown centos:centos /home/centos/scripts/Node/data/PREPA4acum.txt
+chown centos:centos /home/centos/scripts/Node/data/DOSRIOSacum.txt
+chown centos:centos /home/centos/scripts/Node/data/CUAJIMALPAacum.txt
+chown centos:centos /home/centos/scripts/Node/data/BOSQUEREALacum.txt
+chown centos:centos /home/centos/scripts/Node/data/VHERMOSAacum.txt
+chown centos:centos /home/centos/scripts/Node/data/ARAGONacum.txt
+chown centos:centos /home/centos/scripts/Node/data/COAPAacum.txt
+  
+
+
+
+sudo inotifywait -m -r $ruta -e close_write|
+    while read path action file; do
+	min=$(date "+%M")
+	fecha=$(date "+%D_%H:%M:%S")
+	echo $min
+	echo $minActual
+	actual=$(date "+%s")
+	if [[ "$min" != "$minActual" ]]; then
+		echo "Pase por aqui"
+		minActual=$min
+		#titulo=$(date "+%y-%m-%d_%T")
+		#echo $titulo
+		#echo $archivo > $dir/$titulo.txt
+		sudo rm /home/centos/scripts/Node/data/datos2.txt
+		touch /home/centos/scripts/Node/data/datos2.txt
+		echo "" > $dir/$datos.txt
+		#echo "" > $dir/$datos2.txt
+		archivo=""	
+	fi
+        echo "El archivo es '$file' y la ruta es '$path' con la accion '$action'" # If so, do your thing here!
+	estacion="$(echo $file | cut -d "_" -f 1)"
+	#guion= echo "${estacion1: -1}"
+	#echo $guion
+	#if [[ $guion =~ "_" ]]; then
+	#	echo "nO tine guion"
+	#	estacion= $estacion1
+	#else
+	#	echo "tiene guion"
+	#	estacion= echo "${estacion1:: -1}"
+	#fi
+	if [[ $estacion == IIUNAM* ]];then
+		coord="-99.18187, 19.32982"
+		filtro="SI"
+		echo "IIUNAM"
+	fi
+	if [[ $estacion == "ARAGON" ]]; then
+		coord="-99.079917, 19.465908"
+		filtro="SI"
+		echo "ARAGON"
+	fi
+	if [[ $estacion == "COAPA" ]]; then
+		coord="-99.134678, 19.287818"
+		filtro="SI"
+		echo "COAPA"
+	fi
+	if [[ $estacion == "BOSQUEREAL" ]]; then
+		coord="-99.283330, 19.436133"
+		filtro="SI"
+		echo "BOSQUE REAL"
+	fi
+        if [[ $estacion == "DOSRIOS" ]];then
+                coord="-99.344314, 19.370004"
+                echo "DOS RIOS"
+        fi
+        if [[ $estacion == "CUAJIMALPA" ]]; then
+                coord="-99.291582, 19.355342"
+		filtro="SI"
+                echo "CUAJIMALPA"
+        fi
+        if [[ $estacion == "MADIN" ]]; then
+                coord="-99.267414, 19.522665"
+		filtro="SI"
+                echo "MADIN"
+        fi
+        if [[ $estacion == "VHERMOSA" ]]; then
+                coord="-99.276242, 19.372083"
+		filtro="SI"
+                echo "VISTA HERMOSA"
+        fi        
+	if [[ $estacion == "PREPA4" ]];then
+                coord="-99.196129, 19.403589"
+		filtro="SI"
+                echo "PREPA 4"
+        fi
+        if [[ $estacion == SACMEX* ]]; then
+                coord="-99.137096, 19.425079"
+		filtro="SI"
+                echo "SACMEX"
+        fi
+	if [[ $estacion == "TLALNE" ]]; then
+		coord="-99.194856, 19.538833"
+		filtro="SI"
+		echo "TLALNE"
+	fi
+       if [[ $estacion == "CCHOTE" ]]; then
+                coord="-99.059703, 19.383573"
+                filtro="SI"
+                echo "CCHOTE"
+        fi
+        if [[ $estacion == "SISAL" ]]; then
+                filtro="NA"
+                echo "COAPA"
+        fi
+        if [[ $estacion == "CUERNAVACA" ]]; then
+                filtro="NA"
+                echo "BOSQUE REAL"
+        fi
+	if [[ $file == *.oh  ]]; then
+		echo "Repito esta comprimido"
+		if [[ "$filtro" == "SI" ]]; then
+	        gunzip -c < $path$file | while read line
+			 do
+			#echo "Entre a CCHOTE"
+        	        compara="`echo $line | cut -b 1,2`"
+			#echo $compara
+                	if [[ $compara == "01" ]]; then
+				echo "Pase por aqui en cch"
+                        	inten2="`echo $line | cut -d ":" -f 2`"
+                        	inten2="`python -c "print $inten2"`"
+                        	echo $inten2
+               		fi
+                	if [[ $compara == "02" ]]; then
+				echo $line
+                        	acum2="`echo $line | cut -d ":" -f 2`"
+                        	acum2="`python -c "print $acum2"`"
+				echo $acum2
+               		fi
+                	if [[ $compara == "50" ]]; then
+                	echo "{ "'"type"'": "'"Feature"'",
+                 	"'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": ["$coord"]},
+                 	"'"properties"'": {
+                 	"'"name"'": "'"'""$estacion""'"'",
+                 	"'"value"'": "$inten2"
+                 	}
+                 	}," >> $dir/$datos.txt
+	       if [[ $estacion == IIUNAM* ]];then
+                echo "IIUNAM;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "IIUNAM,$inten2,$acum2" > $dir/IIUNAM.txt
+                echo "$actual,IIUNAM,$acum2,$inten2,$fecha" >> $dir/IIUNAMacum.txt
+                fi
+                if [[ $estacion == "ARAGON" ]]; then
+                echo "ARAGON;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "ARAGON,$inten2,$acum2" > $dir/ARAGON.txt
+                echo "$actual,ARAGON,$acum2,$inten2,$fecha" >> $dir/ARAGONacum.txt
+                 fi
+                if [[ $estacion == "COAPA" ]]; then
+                echo "COAPA;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "COAPA,$inten2,$acum2" > $dir/COAPA.txt
+                echo "$actual,COAPA,$acum2,$inten2,$fecha" >> $dir/COAPAacum.txt
+                 fi
+                if [[ $estacion == "BOSQUEREAL" ]]; then
+                echo "BOSQUEREAL;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "BOSQUEREAL,$inten2,$acum2" > $dir/BOSQUEREAL.txt
+                echo "$actual,BOSQUEREAL,$acum2,$inten2,$fecha" >> $dir/BOSQUEREALacum.txt
+                fi
+                if [[ $estacion == "DOSRIOS" ]];then
+                echo "DOSRIOS;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "DOSRIOS,$inten2,$acum2" > $dir/DOSRIOS.txt
+                echo "$actual,DOSRIOS,$acum2,$inten2,$fecha" >> $dir/DOSRIOSacum.txt
+                fi
+                if [[ $estacion == "CUAJIMALPA" ]]; then
+                echo "CUAJIMALPA;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "CUAJIMALPA,$inten2,$acum2" > $dir/CUAJIMALPA.txt
+                echo "$actual,CUAJIMALPA,$acum2,$inten2,$fecha" >> $dir/CUAJIMALPAacum.txt
+                fi
+                if [[ $estacion == "MADIN" ]]; then
+                echo "MADIN;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "MADIN,$inten2,$acum2" > $dir/MADIN.TXT
+                echo "$actual,MADIN,$acum2,$inten2,$fecha" >> $dir/MADINacum.txt
+                fi
+                if [[ $estacion == "VHERMOSA" ]]; then
+                echo "VHERMOSA;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "VHERMOSA,$inten2,$acum2" > $dir/VHEMOSA.txt
+                echo "$actual,VHERMOSA,$acum2,$inten2,$fecha" >> $dir/VHERMOSAacum.txt
+                fi
+	                if [[ $estacion == "PREPA4" ]];then
+                echo "PREPA4;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                echo "PREPA4,$inten2,$acum2" > $dir/PREPA4.txt
+                echo "$actual,PREPA4,$acum2,$inten2,$fecha" >> $dir/PREPA4acum.txt
+                fi
+                if [[ $estacion == SACMEX* ]]; then
+                 echo "SACMEX;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                 echo "SACMEX,$inten2,$acum2" > $dir/SAMCEX.txt
+                 echo "$actual,SACMEX,$acum2,$inten2,$fecha" >> $dir/SACMEXacum.txt
+                fi
+                if [[ $estacion == "TLALNE" ]]; then
+                 echo "TLALNE;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                 echo "TLALNE,$inten,$acum2" > $dir/TLALNE.txt
+                 echo "$actual,TLALNE,$acum2,$inten2,$fecha" >> $dir/TLALNEacum.txt
+                fi
+                if [[ $estacion == "CCHOTE" ]]; then
+                 echo "a huevo pase por aqui"
+                 echo "CCH-OTE;$coord;$inten2;$acum2" >> $dir/$datos2.txt
+                 echo "CCH-OTE,$inten2,$acum2" > $dir/CCH-OTE.txt
+                 echo "$actual,CCH-OTE,$acum2,$inten2,$fecha" >> $dir/CCH-OTEacum.txt
+                fi
+
+                	fi
+        	done
+		
+        fi
+
+	else
+		archivo=$path$file
+		echo "Repito no esta comprimido"
+ 		if [[ "$filtro" == "SI" ]]; then
+	        while IFS= read -r line; do
+                	compara="`echo "$line" | cut -b 1,2,3`"
+                	if [[ "$compara" =~ "01:" ]]; then
+                        inten="`echo $line | cut -d ":" -f 2`"
+                        inten="`python -c "print $inten"`"
+                        echo $inten
+               	 	fi
+                	if [[ "$compara" =~ "02:"  ]]; then
+                        acum="`echo $line | cut -d ":" -f 2`"
+                        acum="`python -c "print $acum"`"
+			echo $acum
+                	fi
+                	if [[ "$compara" =~ "50:"  ]]; then
+                	echo "{ "'"type"'": "'"Feature"'",
+                 	"'"geometry"'": {"'"type"'": "'"Point"'", "'"coordinates"'": ["$coord"]},
+                 	"'"properties"'": {
+                 	"'"name"'": "'"'""$estacion""'"'",
+                 	"'"value"'": "$inten"
+                 	}
+                 	}," >> $dir/$datos.txt
+                if [[ $estacion == IIUNAM* ]];then
+                echo "IIUNAM;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "IIUNAM,$inten,$acum" > $dir/IIUNAM.txt
+                echo "$actual,IIUNAM,$acum,$inten,$fecha" >> $dir/IIUNAMacum.txt
+                fi
+                if [[ $estacion == "ARAGON" ]]; then
+                echo "ARAGON;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "ARAGON,$inten,$acum" > $dir/ARAGON.txt
+                echo "$actual,ARAGON,$acum,$inten,$fecha" >> $dir/ARAGONacum.txt
+                fi
+                if [[ $estacion == "COAPA" ]]; then
+                echo "COAPA;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "COAPA,$inten,$acum" > $dir/COAPA.txt
+                echo "$actual,COAPA,$acum,$inten,$fecha" >> $dir/COAPAacum.txt
+                fi
+                if [[ $estacion == "BOSQUEREAL" ]]; then
+                echo "BOSQUEREAL;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "BOSQUEREAL,$inten,$acum" > $dir/BOSQUEREAL.txt
+                echo "$actual,BOSQUEREAL,$acum,$inten,$fecha" >> $dir/BOSQUEREALacum.txt
+                fi
+                if [[ $estacion == "DOSRIOS" ]];then
+                echo "DOSRIOS;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "DOSRIOS,$inten,$acum" > $dir/DOSRIOS.txt
+                echo "$actual,DOSRIOS,$acum,$inten,$fecha" >> $dir/DOSRIOSacum.txt
+                fi
+                if [[ $estacion == "CUAJIMALPA" ]]; then
+                echo "CUAJIMALPA;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "CUAJIMALPA,$inten,$acum" > $dir/CUAJIMALPA.txt
+                echo "$actual,CUAJIMALPA,$acum,$inten,$fecha" >> $dir/CUAJIMALPAacum.txt
+                fi
+                if [[ $estacion == "MADIN" ]]; then
+                echo "MADIN;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "MADIN,$inten,$acum" > $dir/MADIN.TXT
+                echo "$actual,MADIN,$acum,$inten,$fecha" >> $dir/MADINacum.txt
+                fi
+                if [[ $estacion == "VHERMOSA" ]]; then
+                echo "VHERMOSA;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "VHERMOSA,$inten,$acum" > $dir/VHEMOSA.txt
+                echo "$actual,VHERMOSA,$acum,$inten,$fecha" >> $dir/VHERMOSAacum.txt
+                fi
+                if [[ $estacion == "PREPA4" ]];then
+                echo "PREPA4;$coord;$inten;$acum" >> $dir/$datos2.txt
+                echo "PREPA4,$inten,$acum" > $dir/PREPA4.txt
+                echo "$actual,PREPA4,$acum,$inten,$fecha" >> $dir/PREPA4acum.txt
+                fi
+	         if [[ $estacion == SACMEX* ]]; then
+                 echo "SACMEX;$coord;$inten;$acum" >> $dir/$datos2.txt
+                 echo "SACMEX,$inten,$acum" > $dir/SAMCEX.txt
+                 echo "$actual,SACMEX,$acum,$inten,$fecha" >> $dir/SACMEXacum.txt
+                fi
+                if [[ $estacion == "TLALNE" ]]; then
+                 echo "TLALNE;$coord;$inten;$acum" >> $dir/$datos2.txt
+                 echo "TLALNE,$inten,$acum" > $dir/TLALNE.txt
+                 echo "$actual,TLALNE,$acum,$inten,$fecha" >> $dir/TLALNEacum.txt
+                fi
+                if [[ $estacion == "CCHOTE" ]]; then
+                 echo "No deberia estar aqui"
+                 echo "CCH-OTE;$coord;$inten;$acum" >> $dir/$datos2.txt
+                 echo "CCH-OTE,$inten,$acum" > $dir/CCH-OTE.txt
+                 echo "$actual,CCH-OTE,$acum,$inten,$fecha" >> $dir/CCH-OTEacum.txt
+                fi
+     	fi
+        	done <"$archivo"
+        fi
+
+	fi
+
+    done

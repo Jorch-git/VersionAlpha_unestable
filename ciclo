@@ -1,0 +1,44 @@
+#! /bin/bash
+test=""
+segundo=""
+para=60
+dir="data"
+data="data"
+archivo="data/datos.txt"
+cabecera='{ 
+    "type": "FeatureCollection",
+    "features": ['
+pie="}]
+  }"
+intermedio=""
+cd /home/centos/scripts/Node
+while [[ 1 ]]; do
+	intermerdio=""
+	intermedio="`head -n -1 /home/centos/scripts/Node/data/datos.txt`"
+	#sleep 1
+	#while IFS= read -r line; do
+	#	#echo "entre aqui"
+	#	#echo $line
+	#	intermedio=$intermedio$line
+	#done <"$archivo"
+	#intermedio="$(echo cat "$archivo")"
+	echo $cabecera$intermedio$pie
+        echo $cabecera$intermedio$pie > $dir/$data.geojson
+	#echo $cabecera
+	#echo $intermedio
+	#echo $pie
+	cd /home/centos/scripts/Node
+	npm test
+	sleep 1
+	gzip -f /home/centos/scripts/Node/tests/idw1.geojson
+	sudo scp -i /home/centos/scripts/Node/id_rsa /home/centos/scripts/Node/tests/idw2.geojson jorge@166.62.38.156:/home/jorge/public_html/geojson
+	sudo scp -i /home/centos/scripts/Node/id_rsa /home/centos/scripts/Node/data/datos2.txt jorge@166.62.38.156:/home/jorge/public_html/geojson
+    	segundo=$(date "+%S")
+	if [[ "$segundo" -lt 10 ]]; then
+		segundo="`echo $segundo | cut -b 2`"
+	fi
+	echo $segundo
+	resta="`calc $para - $segundo`" 
+	echo $resta
+	sleep $resta
+done

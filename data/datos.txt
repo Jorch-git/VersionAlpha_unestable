@@ -1,0 +1,8 @@
+
+{ "type": "Feature",
+                                "geometry": {"type": "Point", "coordinates": [-99.18187, 19.32982]},
+                                "properties": {
+                                "name": "IIUNAM",
+                                "value": 0.0
+                                }
+                                },
